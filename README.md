@@ -1,39 +1,39 @@
-# DocuWorks (.xdw) Skill
+# DocuWorks (.xdw) スキル
 
-An [agent skill](https://skills.sh) that lets AI coding agents read and process
-**DocuWorks** files (`.xdw` / `.xbd`). DocuWorks files cannot be read directly,
-so this skill converts them to PDF first (via `xdwlib`), then hands off to your
-normal PDF tooling.
+AI コーディングエージェント（Claude Code / Cursor / Codex など）に
+**DocuWorks** ファイル（`.xdw` / `.xbd`）を読ませるための
+[エージェントスキル](https://skills.sh)です。DocuWorks ファイルは直接読めないため、
+このスキルがまず PDF に変換し（`xdwlib` 使用）、あとは通常の PDF ツールで処理します。
 
-## Install
+## インストール
 
 ```bash
 npx skills add ryobang/xdw-skill
 ```
 
-Works with Claude Code, Cursor, Codex, and every other agent supported by the
-[`skills` CLI](https://github.com/vercel-labs/skills).
+[`skills` CLI](https://github.com/vercel-labs/skills) が対応するエージェントなら
+どれでも使えます。
 
-## What it does
+## できること
 
-- Triggers on any mention of `.xdw` / `.xbd` files or DocuWorks documents.
-- Converts the file to PDF (default compression `MRC_NORMAL`).
-- Lets the agent read or further process the resulting PDF.
+- `.xdw` / `.xbd` ファイルや DocuWorks 文書への言及で自動的に発動
+- ファイルを PDF へ変換（既定の圧縮は `MRC_NORMAL`）
+- 変換後の PDF をエージェントが読み取り・処理
 
-## Requirements
+## 必要環境
 
-- **Windows only** — DocuWorks (FUJIFILM Business Innovation) must be installed.
+- **Windows 専用** — DocuWorks（FUJIFILM Business Innovation）がインストール済みであること
 - `pip install xdwlib`
 
-## Contents
+## 構成
 
 ```
 skills/
   xdw/
-    SKILL.md        # Skill definition (frontmatter + instructions)
-    xdw_to_pdf.py   # Conversion helper
+    SKILL.md        # スキル定義（フロントマター + 手順）
+    xdw_to_pdf.py   # 変換用スクリプト
 ```
 
-## License
+## ライセンス
 
 [MIT](./LICENSE)

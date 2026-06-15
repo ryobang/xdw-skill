@@ -1,65 +1,65 @@
 ---
 name: xdw
-description: Use this skill whenever the user wants to read, view, or process a DocuWorks file (.xdw or .xbd). Automatically convert it to PDF first, then read or process the PDF. Trigger on any mention of .xdw files or DocuWorks documents.
+description: DocuWorks ファイル（.xdw / .xbd）を読む・閲覧する・処理したいときに使うスキル。まず PDF に変換してから PDF として読み取り・処理する。.xdw ファイルや DocuWorks 文書への言及で必ず発動する。Use this skill whenever the user wants to read, view, or process a DocuWorks file (.xdw or .xbd).
 ---
 
-# DocuWorks (.xdw) File Handling
+# DocuWorks (.xdw) ファイルの取り扱い
 
-## Overview
+## 概要
 
-DocuWorks files (`.xdw` / `.xbd`) cannot be read directly by agents or standard
-tools. Always convert them to PDF first using `xdwlib`, then process the PDF with
-your normal PDF tooling.
+DocuWorks ファイル（`.xdw` / `.xbd`）は、エージェントや一般的なツールから直接は
+読めません。必ず先に `xdwlib` で PDF に変換し、変換後の PDF を通常の PDF ツールで
+処理してください。
 
-## Prerequisites
+## 前提条件
 
-- **Windows only.** DocuWorks is Fuji Xerox / FUJIFILM Business Innovation software
-  that runs on Windows, and `xdwlib` drives the installed DocuWorks engine.
-- DocuWorks must be installed on the machine.
-- Install xdwlib: `pip install xdwlib`
+- **Windows 専用。** DocuWorks（富士ゼロックス / FUJIFILM Business Innovation の
+  ソフトウェア）は Windows で動作し、`xdwlib` はインストール済みの DocuWorks エンジンを
+  呼び出します。
+- DocuWorks がマシンにインストールされていること。
+- xdwlib のインストール: `pip install xdwlib`
 
-## Setup
+## セットアップ
 
-`xdw_to_pdf.py` is included in this skill folder. Use it directly from the skill
-directory, or copy it next to your working files.
+`xdw_to_pdf.py` はこのスキルフォルダに同梱されています。スキルディレクトリから
+そのまま使うか、作業ファイルの隣にコピーして使ってください。
 
-## How to Convert and Read
+## 変換して読む手順
 
-### Step 1: Convert .xdw to PDF
+### 手順1: .xdw を PDF に変換
 
 ```python
 import sys
-sys.path.insert(0, r"<path/to/the/folder/containing/xdw_to_pdf.py>")
+sys.path.insert(0, r"<xdw_to_pdf.py を置いたフォルダのパス>")
 from xdw_to_pdf import convert_xdw_to_pdf
 
 pdf_path = convert_xdw_to_pdf(r"path/to/file.xdw")
-# Returns the output PDF path (same location, .pdf extension)
+# 出力 PDF のパスを返す（同じ場所・拡張子 .pdf）
 ```
 
-Or run it directly from the command line:
+またはコマンドラインから直接実行:
 
 ```bash
-python "<path/to/xdw_to_pdf.py>" "path/to/file.xdw"
-# Optional second argument: explicit output path
-python "<path/to/xdw_to_pdf.py>" "path/to/file.xdw" "path/to/out.pdf"
+python "<xdw_to_pdf.py のパス>" "path/to/file.xdw"
+# 第2引数で出力先を明示することも可能
+python "<xdw_to_pdf.py のパス>" "path/to/file.xdw" "path/to/out.pdf"
 ```
 
-### Step 2: Read the PDF
+### 手順2: PDF を読む
 
-After conversion, read the resulting `.pdf` with your normal PDF reader or PDF
-skill.
+変換後、生成された `.pdf` を通常の PDF リーダーや PDF スキルで読み取ってください。
 
-## Key Details
+## 補足
 
-- The output PDF is saved next to the source `.xdw` with a `.pdf` extension unless
-  an explicit output path is given.
-- Default compression: `MRC_NORMAL` (good balance of quality and file size).
+- 出力 PDF は、出力先を明示しない限り、元の `.xdw` と同じ場所に `.pdf` 拡張子で
+  保存されます。
+- 既定の圧縮方式: `MRC_NORMAL`（品質とファイルサイズのバランスが良い）。
 
-## Compress Options
+## 圧縮オプション
 
-| Option            | Use case                  |
+| オプション         | 用途                       |
 | ----------------- | ------------------------- |
-| `MRC_NORMAL`      | Default, balanced         |
-| `MRC_HIGHQUALITY` | When quality matters      |
-| `MRC_HIGHCOMPRESS`| When file size matters    |
-| `NORMAL`          | Simple raster, no MRC     |
+| `MRC_NORMAL`      | 既定。バランス型           |
+| `MRC_HIGHQUALITY` | 品質を優先したいとき        |
+| `MRC_HIGHCOMPRESS`| ファイルサイズを優先したいとき |
+| `NORMAL`          | MRC なしの単純ラスター      |
