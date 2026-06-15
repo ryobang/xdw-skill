@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Converted output / test artifacts
+*.pdf
+*.xdw
+*.xbd
+
+# OS
+.DS_Store
+Thumbs.db
