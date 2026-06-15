@@ -1,9 +1,9 @@
 # DocuWorks (.xdw) スキル
 
-AI コーディングエージェント（Claude Code / Cursor / Codex など）に
-**DocuWorks** ファイル（`.xdw` / `.xbd`）を読ませるための
-[エージェントスキル](https://skills.sh)です。DocuWorks ファイルは直接読めないため、
-このスキルがまず PDF に変換し（`xdwlib` 使用）、あとは通常の PDF ツールで処理します。
+ClaudeCodeに**DocuWorks** ファイル（`.xdw` / `.xbd`）を読ませるための
+[エージェントスキル](https://skills.sh)です。
+
+DocuWorks ファイルは直接読めないため、このスキルがまず PDF に変換し（`xdwlib` 使用）、あとは通常の PDF ツールで処理します。
 
 ## インストール
 
@@ -11,8 +11,6 @@ AI コーディングエージェント（Claude Code / Cursor / Codex など）
 npx skills add ryobang/xdw-skill
 ```
 
-[`skills` CLI](https://github.com/vercel-labs/skills) が対応するエージェントなら
-どれでも使えます。
 
 ## できること
 
