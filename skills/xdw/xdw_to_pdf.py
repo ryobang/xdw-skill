@@ -5,11 +5,23 @@ Uses xdwlib: https://xdwlib.readthedocs.io/
 
 Prerequisites:
   - DocuWorks must be installed (Windows only).
-  - pip install xdwlib
+  - Python 3.10+ (uses `str | None`).
+  - xdwlib (auto-installed on first run if missing).
 """
 
-import xdwlib
+import subprocess
+import sys
 from pathlib import Path
+
+try:
+    import xdwlib
+except ImportError:
+    # If xdwlib is missing, try to install it automatically.
+    # Note: xdwlib is a wrapper around the DocuWorks engine, so even a successful
+    # pip install will not convert anything unless DocuWorks itself is installed.
+    print("xdwlib not found; running 'pip install xdwlib'...")
+    subprocess.run([sys.executable, "-m", "pip", "install", "xdwlib"], check=True)
+    import xdwlib
 
 
 def convert_xdw_to_pdf(xdw_path: str, output_path: str | None = None) -> str:
@@ -46,8 +58,6 @@ def convert_xdw_to_pdf(xdw_path: str, output_path: str | None = None) -> str:
 
 
 if __name__ == "__main__":
-    import sys
-
     if len(sys.argv) < 2:
         print("Usage: python xdw_to_pdf.py <input.xdw> [output.pdf]")
         sys.exit(1)

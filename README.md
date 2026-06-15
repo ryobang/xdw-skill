@@ -23,7 +23,8 @@ npx skills add ryobang/xdw-skill
 ## 必要環境
 
 - **Windows 専用** — DocuWorks（FUJIFILM Business Innovation）がインストール済みであること
-- `pip install xdwlib`
+- **Python 3.10 以上**（`str | None` 型注記を使用）
+- `xdwlib` — 未インストールなら `xdw_to_pdf.py` が初回実行時に自動で `pip install` します（手動なら `pip install xdwlib`）
 
 ## 構成
 
